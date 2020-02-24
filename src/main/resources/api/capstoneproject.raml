@@ -1,0 +1,100 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/35bae774-1a1d-41e2-aaa9-422ad4db20a8/ # 
+title: CapstoneProject
+version: 
+mediaType: application/json
+       
+/users:
+ description: Retrieve all users
+ 
+ get:
+    displayName: AllUsers
+    description: Get all list of all of users
+       
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include Types/User1dataType.raml
+            example: !include Example/Userexample.raml
+      404:
+        body:
+          application/json:
+            example: "No user found"
+ post:
+    description: create list of users
+    displayName: CreatUser
+    body:
+      application/json:
+        type: !include /Types/User1dataType.raml
+        example: !include Example/Userexample.raml
+        
+    responses:
+      201:
+        body:
+          application/json:
+            example: "A use has been added"
+      404:
+        body:
+          application/json:
+            example: "User cannot be added, please try again "
+  
+ /{userid}:
+    description: Retrieve user by Id
+   
+    
+      
+    get:
+      displayName: FindUser
+      queryParameters:
+       UserID?: number
+      responses:
+       200:
+        body:
+          application/json:
+           
+              
+            type: !include Types/UserdataTypeByID.raml  
+            example: !include Example/UserexampleByID.raml
+       404:
+        body:
+          application/json:
+            example: "No user found"
+
+    put:
+     description: update user by Id
+     displayName: UpdateUser
+     body:
+      application/json:
+        type: !include /Types/UserdataTypeByID.raml
+        example: !include Example/UserexampleByID.raml
+     responses:
+       201:
+        body:
+          application/json:
+            example: "A use has been updated"
+       404:
+        body:
+          application/json:
+            example: "User cannot be updated, please try again "
+
+    delete:
+      description: Delete user by id
+      displayName: DeleteUser
+      body:
+       application/json:
+        type: !include Types/UserdataTypeByID.raml
+        example: !include Example/UserexampleByID.raml
+      responses:
+       201:
+        body:
+          application/json:
+            example: "A user has been deleted"
+       404:
+        body:
+          application/json:
+            example: "User cannot be deleted, please try again"        
+
+
+            
+            
